@@ -3,13 +3,15 @@ import mongoose from 'mongoose';
 import cors from 'cors';    
 import dotenv from 'dotenv';
 
+import searchRoutes from './routes/searchRoutes.js'
+
 dotenv.config();
 
 const app=express();
 const port=process.env.PORT || 5000;
 
 app.use(cors({                                  // Only allow requests from our React app
-    origin:'http://localhost:3000',
+    origin:'http://localhost:5173',
     credentials:true
 }));
 
@@ -26,6 +28,12 @@ mongoose.connect(process.env.MONGODB_URI )
     });
 
 
+app.use('/api/search', searchRoutes)
+
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok', message: 'DealLens server is running 🔍' })
+})
+
 app.get("/",(req,res)=>{
     res.json({
         status:"ok",
@@ -33,6 +41,31 @@ app.get("/",(req,res)=>{
     });
 });
 
+// Temporary test route — add this before app.listen
+app.get('/api/test-cloudinary', async (req, res) => {
+  try {
+    const cloudinary = await import('cloudinary')
+    
+    cloudinary.v2.config({
+      cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+      api_key: process.env.CLOUDINARY_API_KEY,
+      api_secret: process.env.CLOUDINARY_API_SECRET
+    })
+
+    // Ping Cloudinary to check credentials
+    const result = await cloudinary.v2.api.ping()
+    res.json({ 
+      success: true, 
+      message: 'Cloudinary connected!',
+      result 
+    })
+  } catch (error) {
+    res.json({ 
+      success: false, 
+      error: error.message 
+    })
+  }
+})
 
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`)
