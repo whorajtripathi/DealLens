@@ -18,3 +18,8 @@ export const submitSearch = async (formData) => {
   })
   return response.data
 }
+
+export const getSearchById = async (searchId) => {
+  const response = await API.get(`/search/${searchId}`)
+  return response.data
+}

@@ -3,7 +3,7 @@
 // Route = URL + HTTP method + which controller function to call
 
 import express from 'express'
-import { createSearch } from '../controllers/searchController.js'
+import { createSearch, getSearch } from '../controllers/searchController.js'
 import upload from '../middleware/upload.js'
 
 const router = express.Router()
@@ -14,5 +14,6 @@ const router = express.Router()
 //   → puts it in req.file
 //   → then passes to createSearch controller
 router.post('/', upload.single('image'), createSearch)
+router.get('/:id', getSearch)        
 
 export default router

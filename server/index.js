@@ -67,6 +67,23 @@ app.get('/api/test-cloudinary', async (req, res) => {
   }
 })
 
+app.get('/api/test-gemini', async (req, res) => {
+  try {
+    const { GoogleGenerativeAI } = await import('@google/generative-ai')
+    const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY)
+
+    // Test with this model
+    const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash-exp' })
+
+    const result = await model.generateContent('Say hello in one word')
+    const text = result.response.text()
+
+    res.json({ success: true, response: text })
+  } catch (error) {
+    res.json({ success: false, error: error.message })
+  }
+})
+
 app.listen(port,()=>{
     console.log(`Server running on http://localhost:${port}`)
 });
