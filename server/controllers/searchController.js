@@ -462,3 +462,24 @@ export const getSearch = async (req, res) => {
     })
   }
 }
+
+// Add at the bottom
+export const getHistory = async (req, res) => {
+  try {
+    // Get last 20 searches, newest first
+    const searches = await Search.find()
+      .sort({ createdAt: -1 })
+      .limit(20)
+
+    res.json({
+      success: true,
+      searches
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: 'Something went wrong',
+      error: error.message
+    })
+  }
+}

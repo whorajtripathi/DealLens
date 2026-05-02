@@ -281,8 +281,13 @@ function Results() {
 
       {/* ── Results Heading ── */}
       <div className="results-heading">
-        <h3>🏆 Top {results.length} Deals Found</h3>
-        <p>Ranked by price, quality, ratings and delivery</p>
+        <div>
+          <h3>🏆 Top {results.length} Deals Found</h3>
+          <p>Ranked by price, quality, ratings and delivery</p>
+        </div>
+        <button className="compare-all-btn" onClick={() => navigate(`/compare/${searchId}`)}>
+            ⚖️ Compare All
+        </button>
       </div>
 
       {/* ── Deal Cards ── */}
