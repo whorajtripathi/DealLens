@@ -2,6 +2,81 @@
 // // Takes a search query and returns product results from
 // // Amazon, Flipkart, Meesho and other shopping sites
 
+// import axios from 'axios'
+// import dotenv from 'dotenv'
+
+// dotenv.config()
+
+// const GOOGLE_SEARCH_API_KEY = process.env.GOOGLE_SEARCH_API_KEY
+// const GOOGLE_SEARCH_ENGINE_ID = process.env.GOOGLE_SEARCH_ENGINE_ID
+
+// export const searchProducts = async (searchQuery) => {
+//   try {
+//     console.log('🔍 Searching Google for:', searchQuery)
+
+//     // Google Custom Search API endpoint
+//     const response = await axios.get(
+//       'https://www.googleapis.com/customsearch/v1',
+//       {
+//         params: {
+//           key: GOOGLE_SEARCH_API_KEY,
+//           cx: GOOGLE_SEARCH_ENGINE_ID,
+//           q: searchQuery + ' buy online India',  // add context
+//           num: 10,                                // get 10 results
+//           gl: 'in',                               // country = India
+//           hl: 'en'                                // language = English
+//         }
+//       }
+//     )
+
+//     const items = response.data.items || []
+//     console.log(`✅ Found ${items.length} results from Google`)
+
+//     // Extract only what we need from each result
+//     // Google returns a LOT of data — we only want the useful parts
+//     const cleanedResults = items.map((item, index) => ({
+//       position: index + 1,
+//       title: item.title,
+//       url: item.link,
+//       displayUrl: item.displayLink,
+//       description: item.snippet,
+//       website: extractWebsiteName(item.displayLink)
+//     }))
+
+//     return cleanedResults
+
+//   } catch (error) {
+//     console.error('❌ Google Search error:', error.response?.data || error.message)
+//     throw error
+//   }
+// }
+
+// // Helper — extract clean website name from URL
+// // "www.amazon.in" → "Amazon"
+// // "www.flipkart.com" → "Flipkart"
+// const extractWebsiteName = (displayLink) => {
+//   if (!displayLink) return 'Unknown'
+
+//   const link = displayLink.toLowerCase()
+
+//   if (link.includes('amazon')) return 'Amazon'
+//   if (link.includes('flipkart')) return 'Flipkart'
+//   if (link.includes('meesho')) return 'Meesho'
+//   if (link.includes('myntra')) return 'Myntra'
+//   if (link.includes('ajio')) return 'Ajio'
+//   if (link.includes('snapdeal')) return 'Snapdeal'
+//   if (link.includes('nykaa')) return 'Nykaa'
+//   if (link.includes('reliance')) return 'Reliance Digital'
+//   if (link.includes('croma')) return 'Croma'
+//   if (link.includes('tatacliq')) return 'Tata Cliq'
+
+//   // fallback — capitalize first letter of domain
+//   return displayLink
+//     .replace('www.', '')
+//     .split('.')[0]
+//     .charAt(0).toUpperCase() +
+//     displayLink.replace('www.', '').split('.')[0].slice(1)
+// }
 
 
 import { getJson } from 'serpapi'

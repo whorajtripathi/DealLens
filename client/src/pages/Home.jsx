@@ -58,7 +58,7 @@ function Home() {
   // Called when user clicks Search button
   const handleSubmit = async () => {
     // Validation
-    if (activeTab === 'image' && !selectedImage) {
+    if (activeTab === 'image' && !selectedImage) { 
       setError('Please select an image first')
       return
     }
