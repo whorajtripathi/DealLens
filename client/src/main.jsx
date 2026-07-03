@@ -15,3 +15,4 @@ createRoot(document.getElementById('root')).render(
     </BrowserRouter>
   </StrictMode>
 )
+// Note: If you want to use React Router's "HashRouter" instead of "BrowserRouter", you can replace it here. HashRouter is useful for static file hosting where the server doesn't handle dynamic routes. 
