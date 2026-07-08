@@ -13,26 +13,8 @@ DealLens is an AI-powered web application that helps users find the best online 
 6. Gemini AI ranks the results based on relevance and value.
 7. The best deals are displayed with a comparison view and stored in MongoDB for future access.
 
-🛠️ Tech Stack
-  Frontend
-- React.js
-- Vite
-- Axios
-- React Router
-- CSS
-  Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
-- Multer
+🌐 Live Demo
 
-  AI & APIs
-- Google Gemini AI
-- SerpAPI
-- Cloudinary
+Frontend: https://deal-lens-two.vercel.app
 
-  Deployment
-- Vercel
-- Render
-- MongoDB Atlas
+Backend: https://deallens-backend-rahj.onrender.com
