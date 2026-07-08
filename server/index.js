@@ -37,13 +37,35 @@ app.use(express.json()); // Parse JSON request bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bodies
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI )
-    .then(() => {
-        console.log('Connected to MongoDB');
-    })
-    .catch((error) => {
-        console.error('Error connecting to MongoDB:', error);
-    });
+// mongoose.connect(process.env.MONGODB_URI )
+//     .then(() => {
+//         console.log('Connected to MongoDB');
+//     })
+//     .catch((error) => {
+//         console.error('Error connecting to MongoDB:', error);
+//     });
+
+mongoose
+  .connect(process.env.MONGODB_URI)
+  .then(() => {
+    console.log("✅ Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB Connection Error");
+    console.error(err);
+  });
+
+mongoose.connection.on("connected", () => {
+  console.log("🟢 Mongoose Connected");
+});
+
+mongoose.connection.on("error", (err) => {
+  console.log("🔴 Mongoose Error:", err);
+});
+
+mongoose.connection.on("disconnected", () => {
+  console.log("🟡 Mongoose Disconnected");
+});
 
 
 app.use('/api/search', searchRoutes)
