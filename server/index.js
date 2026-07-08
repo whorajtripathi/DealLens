@@ -18,6 +18,7 @@ const port=process.env.PORT || 5000;
 const allowedOrigins = [
   "http://localhost:5173",
   "https://deal-lens-two.vercel.app",
+  "https://deal-lens-l2b08vooq-rst2026.vercel.app",
 ];
 
 app.use(
