@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './History.css'
+import API from '../services/api'
 
 function History() {
   const navigate = useNavigate()
@@ -14,7 +15,9 @@ function History() {
   useEffect(() => {
     const fetchHistory = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/search/history')
+        // const response = await axios.get('http://localhost:5000/api/search/history')
+        // setSearches(response.data.searches)
+        const response = await API.get('/search/history')
         setSearches(response.data.searches)
         setLoading(false)
       } catch (err) {

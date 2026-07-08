@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './Compare.css'
+import { getSearchById } from '../services/api'
 
 function Compare() {
   const { searchId } = useParams()
@@ -15,10 +16,12 @@ function Compare() {
   useEffect(() => {
     const fetchSearch = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/search/${searchId}`
-        )
-        setSearch(response.data.search)
+        // const response = await axios.get(
+        //   `http://localhost:5000/api/search/${searchId}`
+        // )
+        // setSearch(response.data.search)
+        const response = await getSearchById(searchId)
+        setSearch(response.search)
         setLoading(false)
       } catch (err) {
         console.error(err)

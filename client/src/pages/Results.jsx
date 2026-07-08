@@ -156,6 +156,7 @@ import { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './Results.css'
+import { getSearchById } from '../services/api'
 
 function Results() {
   const { searchId } = useParams()
@@ -169,10 +170,9 @@ function Results() {
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:5000/api/search/${searchId}`
-        )
-        const data = response.data.search
+        const response = await getSearchById(searchId)
+
+        const data = response.search
         setSearch(data)
         setStatus(data.status)
 
