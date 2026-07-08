@@ -10,10 +10,27 @@ dotenv.config();
 const app=express();
 const port=process.env.PORT || 5000;
 
-app.use(cors({                                  // Only allow requests from our React app
-    origin:'http://localhost:5173',
-    credentials:true
+// app.use(cors({                                  // Only allow requests from our React app
+//     origin:'http://localhost:5173',
+//     credentials:true
+// }));
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://your-vercel-app.vercel.app" // Replace later
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true
 }));
+
 
 app.use(express.json()); // Parse JSON request bodies
 app.use(express.urlencoded({ extended: true })); // Parse URL-encoded request bodies
